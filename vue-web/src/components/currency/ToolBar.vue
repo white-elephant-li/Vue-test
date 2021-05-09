@@ -36,7 +36,7 @@
             }
         },
         methods: {
-            onChangeFragment: (item,index)=>{
+            onChangeFragment: function(item,index){
                 this.selectItemIndex = index;
                 this.$emit('onChangeFragment',item.componentName);
             }
