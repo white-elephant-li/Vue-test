@@ -7,17 +7,7 @@ module.exports = {
         if (process.env.NODE_ENV === 'production') {
             // 为生产环境修改配置...
         } else {
-            // config.module
-            //     .rule('css')
-            //     .use('css-loader')
-            //     .loader('css-loader')
-            //     .options({
-            //         lessOptions: {
-            //             /**less-loader 配置 */
-            //             strictMath: true,
-            //             noIeCompat: true
-            //         }
-            //     })
+            
             return {
                 resolve: {
                     alias: {
@@ -26,9 +16,7 @@ module.exports = {
                         '@img': path.resolve(__dirname, './src/assets/img'),
                         '@c': path.resolve(__dirname, './src/components'),
                     }
-                }
-
-
+                },
             }
         }
     }

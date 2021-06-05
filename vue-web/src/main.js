@@ -2,7 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './assets/js/htmlFontSize.js'
+
+import '@js/filters.js';
+import '@js/htmlFontSize.js';
+import '@js/axios.config';
+import '@js/IsIphoneX';
 
 Vue.config.productionTip = false
 

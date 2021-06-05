@@ -1,6 +1,6 @@
 <template>
-    <div class="tool-bar">
-        <div class="tool-bar-item" @click="onChangeFragment(item,index)"
+    <div class="tool-bar" :class="{'iphonex-bottom' : isIphoneX}">
+        <div class="tool-bar-item" @click="onItemClick(item, index)"
         v-for="(item,index) in toolBarData" :key="index">
             <img class="tool-bar-item-img" :src="[index === selectItemIndex ? item.hIcon : item.nIcon]" alt="" srcset=""/>
             <p class="tool-bar-item-name" :class="{'tool-bar-item-name-h': index === selectItemIndex}">{{item.name}}</p>
@@ -32,13 +32,17 @@
                         componentName: 'my'
                     }
                 ],
-                selectItemIndex: 0
+                selectItemIndex: 0,
+                isIphoneX: window.isIphoneX
             }
         },
         methods: {
-            onChangeFragment: function(item,index){
+            onItemClick: function (item, index) {
                 this.selectItemIndex = index;
-                this.$emit('onChangeFragment',item.componentName);
+                this.$emit('onChangeFragment', item.componentName);
+            },
+            onChangeComponent: function (index) {
+                this.onItemClick(this.toolBarData[index], index);
             }
         },
     }
@@ -69,7 +73,7 @@
             }
 
             &-name {
-                font-size: $infoSize;
+                font-size: $minInfoSize;
                 margin-top: px2rem(4);
                 &-h {
                     color: $mainColor;

@@ -1,19 +1,43 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import Main from '../views/Main.vue'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-const routes = [{
-    path: '/',
-    name: 'Main',
-    component: Main
-}]
 
-const router = new VueRouter({
+const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes
-})
+    routes: [
+        {
+            path: '/',
+            name: 'Main',
+            component: Main,
+        },
+        {
+            path: '/goodsList',
+            name: 'goodsList',
+            component: () => import(/* webpackChunkName: "goodsList" */ '../views/GoodsList.vue'),
+        },
+        {
+            path: '/goodsDetails',
+            name: 'goodsDetails',
+            component: () => import(/* webpackChunkName: "goodsDetails" */ '../views/GoodsDetails.vue'),
+        },
+        {
+            path: '/buy',
+            name: 'buy',
+            component: () => import(/* webpackChunkName: "buy" */ '../views/Buy.vue'),
+        },{
+            path: '/login',
+            name: 'login',
+            component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+        },{
+            path: '/register',
+            name: 'register',
+            component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
+        },
+    ]
+});
 
 export default router
