@@ -6,9 +6,9 @@
         ref="goodsItem" @click="onGoodsItemClick(item)">
             <img class="goods-item-img" :src="item.img" alt="" srcset="" :style="imgStyles[index]">
             <div class="goods-item-desc">
-                <p class="goods-item-desc-name" :class="{'goods-item-desc-name-hint' : !item.have}">
+                <p class="goods-item-desc-name" :class="{'goods-item-desc-name-hint' : !item.isHave}">
                     <direct v-if="item.direct"></direct>
-                    <no-have v-if="!item.have"></no-have>
+                    <no-have v-if="!item.isHave"></no-have>
                     {{item.name}}
                 </p>
                 <div class="goods-item-desc-data">
@@ -104,11 +104,11 @@ export default {
                     break;
                 // 有货优先
                 case '2':
-                    this.getSortGoodsDataFromKey('have');
+                    this.getSortGoodsDataFromKey('isHave');
                     break;
                 // 直营优先
                 case '3':
-                    this.getSortGoodsDataFromKey('direct');
+                    this.getSortGoodsDataFromKey('isDirect');
                     break;
             }
         },
@@ -228,7 +228,7 @@ export default {
          * 商品点击事件
          */
         onGoodsItemClick: function (item) {
-            if (!item.have) {
+            if (!item.isHave) {
                 alert('该商品暂无库存');
                 return;
             }
