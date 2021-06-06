@@ -38,6 +38,7 @@ export default {
             password: '',
             comfirmPassword: '',
             md5Password: '',
+            user: {}
         }
     },
     methods: {
@@ -63,11 +64,24 @@ export default {
 
             this.md5Password = md5(this.password);
 
-            if (window.androidJSBridge) {
-                this.onRegisterToAndroid();
-            } else if (window.webkit) {
-                this.onRegisterToIos();
+            this.user = {
+                "username": this.username,
+                "password": this.md5Password
             }
+            
+            this.$http.post("/user/register",this.user).then(response =>{
+                console.log(response);
+                if (response == 0){
+                    alert("注册成功");
+                    this.onBackClick();
+                }else {
+                    alert("用户名重复，请重新再试");
+                }
+            }).catch(err=>{
+                if (err){
+                    alert(err);
+                }
+            });
         },
         /**
          * 调用 android 注册方法

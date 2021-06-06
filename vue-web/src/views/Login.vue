@@ -33,7 +33,8 @@ export default {
         return {
             username: '',
             password: '',
-            md5Password: ''
+            md5Password: '',
+            user: {},
         }
     },
     methods: {
@@ -52,14 +53,31 @@ export default {
                  alert('用户名或密码未输入');
                  return;
             }
-
+            
             this.md5Password = md5(this.password);
-
-            if (window.androidJSBridge) {
-                this.onLoginToAndroid();
-            } else if (window.webkit) {
-                this.onLoginToIos();
+            this.user ={
+                "username": this.username,
+                "password": this.md5Password
             }
+            this.$http.post("/user/login",this.user).then(res=>{
+                if (res == 1){
+                    alert("用户名和密码错误");
+                }else {
+                    alert("用户："+res.username+"登录成功！！！");
+                    this.$store.commit("setUsername",res.username);
+                    this.$store.commit("setSessionId",res.SessionId);
+                    window.sessionStorage.setItem("username",res.username);
+                    window.sessionStorage.setItem("sessionid",res.SessionId);
+                    this.onBackClick();
+                }
+            })
+            
+            
+            // if (window.androidJSBridge) {
+            //     this.onLoginToAndroid();
+            // } else if (window.webkit) {
+            //     this.onLoginToIos();
+            // }
         },
         /**
          * 注册按钮点击事件

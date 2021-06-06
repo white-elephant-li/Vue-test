@@ -10,7 +10,8 @@ export default new Vuex.Store({
         shoppingDatas: [
         ],
         // 进入商品详情的数据
-        selectGoods: {}
+        selectGoods: {},
+        sessionId: {},
     },
     mutations: {
         setUsername: function (state, username) {
@@ -18,6 +19,13 @@ export default new Vuex.Store({
         },
         clearUsername: function (state) {
             state.username = undefined;
+        },
+        setSessionId: function (state , sessionId)
+        {
+            state.sessionId = sessionId;
+        },
+        clearSessionId: function (state) {
+            state.sessionId = undefined;
         },
         /**
          * 添加购物车商品

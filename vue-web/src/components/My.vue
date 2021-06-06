@@ -1,7 +1,7 @@
 <template>
     <div class="my">
-<!--        <navgation-bar :pageName="'个人中心'" :isShowBack="false">-->
-<!--        </navgation-bar>-->
+        <navgation-bar :pageName="'个人中心'" :isShowBack="false">
+        </navgation-bar>
 
         <div class="my-content">
 
@@ -27,10 +27,10 @@
 
 
 <script>
-// import NavgationBar from '@c/currency/NavigationBar';
+ import NavgationBar from '@c/currency/NavigationBar';
 export default {
     components: {
-        // NavgationBar
+        NavgationBar
     },
     data: function () {
         return {
@@ -40,6 +40,12 @@ export default {
                 '应用推荐',
                 '用户福利',
             ],
+        }
+    },
+    created: function (){
+        if (window.sessionStorage.getItem("username") && window.sessionStorage.getItem("sessionid")){
+            this.$store.commit("setUsername",window.sessionStorage.getItem("username"));
+            this.$store.commit("setSessionId",window.sessionStorage.getItem("sessionid"));
         }
     },
     methods: {
@@ -57,15 +63,20 @@ export default {
                 },
             })
         },
+        
         /**
          * 退出登录按钮点击事件
          */
         onLogoutClick: function () {
-            if (window.androidJSBridge) {
-                this.onLogoutToAndroid();
-            } else if (window.webkit) {
-                this.onLogoutToIos();
-            }
+            sessionStorage.clear();
+            this.$store.commit("clearUsername");
+            this.$store.commit("clearSessionId");
+            // if (window.androidJSBridge) {
+            //     this.onLogoutToAndroid();
+            // } else if (window.webkit) {
+            //     this.onLogoutToIos();
+            // }
+            
         },
         /**
          * 调用 android 退出登录的方法
