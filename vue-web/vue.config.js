@@ -3,6 +3,9 @@ const path = require('path');
 
 
 module.exports = {
+    devServer: {
+        disableHostCheck: true
+    },
     configureWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
             // 为生产环境修改配置...
