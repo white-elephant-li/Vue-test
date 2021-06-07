@@ -98,6 +98,7 @@ export default {
             支付宝支付
          */
         aliPay: function () {
+            
             if (window.androidJSBridge) {
                 window.androidJSBridge.aliPay(JSON.stringify(this.goodsData));
             } else if (window.webkit) {
@@ -113,6 +114,14 @@ export default {
             } else if (window.webkit) {
 
             }
+        },
+        onBuyClick: function () {
+            this.$router.push({
+                name: 'buy',
+                params: {
+                    routerType: 'push',
+                }
+            })
         }
     }
 }

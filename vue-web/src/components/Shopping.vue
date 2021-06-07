@@ -35,7 +35,7 @@
                     <p class="shopping-content-total-price-all">总额:<span>￥{{totalDatas.totalPrice | priceValue}}</span>&nbsp;&nbsp;立减:<span>￥00.00</span></p>
                 </div>
 
-                <div class="shopping-content-total-settlement">
+                <div class="shopping-content-total-settlement" @click="aliPay">
                     去结算({{totalDatas.goodsNumber}})
                 </div>
 
@@ -123,7 +123,23 @@ export default {
             if (item.isCheck) {
                 this.computeGoodsTotal();
             }
-        }
+        },
+        aliPay: function () {
+            if (window.androidJSBridge) {
+                window.androidJSBridge.aliPay(JSON.stringify(this.totalDatas));
+            } else if (window.webkit) {
+
+            }
+        },
+        // onBuyClick: function () {
+        //     this.$router.push({
+        //         name: 'buy',
+        //         params: {
+        //             routerType: 'push',
+        //         }
+        //     })
+        // }
+        
 
     },
 };
