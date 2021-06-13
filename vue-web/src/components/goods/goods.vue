@@ -7,7 +7,7 @@
             <img class="goods-item-img" :src="item.img" alt="" srcset="" :style="imgStyles[index]">
             <div class="goods-item-desc">
                 <p class="goods-item-desc-name" :class="{'goods-item-desc-name-hint' : !item.isHave}">
-                    <direct v-if="item.direct"></direct>
+                    <direct v-if="item.isDirect"></direct>
                     <no-have v-if="!item.isHave"></no-have>
                     {{item.name}}
                 </p>
